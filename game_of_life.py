@@ -71,8 +71,7 @@ class LifeGame:
 
     def update_generation(self):
 
-        rows = [0] * self.nr
-        self.old_grid = [rows] * self.nc
+        self.old_grid = self.init_grids()
 
         for i in range(self.nc):
             for j in range(self.nr):
