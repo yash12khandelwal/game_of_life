@@ -2,26 +2,27 @@ import pygame
 import time
 import sys
 
-Screen_Size = Width, Height = (600, 600)
-Cellsize = 10
-Ded_clr = 0, 0, 0
-Alv_clr = 255, 255, 255
-
 
 class LifeGame:
-    def __init__(self):
+    def __init__(self, screen_size, cell_size, ded_clr, alv_clr):
+
+        self.screen_size = screen_size
+        self.cell_size = cell_size
+        self.ded_clr = ded_clr
+        self.alv_clr = alv_clr
+
         print("input file: ")
         string = input()
         path = "input_files/" + string
         self.file = open(path, "r")
         self.data = list(self.file)
         pygame.init()
-        self.screen = pygame.display.set_mode(Screen_Size)
+        self.screen = pygame.display.set_mode(self.screen_size)
         self.clear()
         pygame.display.flip()
 
-        self.nc = int(Width / Cellsize)
-        self.nr = int(Height / Cellsize)
+        self.nc = int(Width / self.cell_size)
+        self.nr = int(Height / self.cell_size)
 
         self.old_grid = self.init_grids()
         self.set_grid()
@@ -46,7 +47,7 @@ class LifeGame:
                 self.old_grid[i][j] = cellvalue"""
 
     def clear(self):
-        self.screen.fill(Ded_clr)
+        self.screen.fill(self.ded_clr)
 
     def check_neighbours(self, x, y):
         cnt = 0
@@ -94,17 +95,17 @@ class LifeGame:
         for i in range(self.nc):
             for j in range(self.nr):
                 if self.old_grid[i][j] == 1:
-                    color = Alv_clr
+                    color = self.alv_clr
                 else:
-                    color = Ded_clr
+                    color = self.ded_clr
                 pygame.draw.rect(
                     self.screen,
                     color,
                     (
-                        i * Cellsize + Cellsize,
-                        j * Cellsize + Cellsize,
-                        Cellsize,
-                        Cellsize,
+                        i * self.cell_size + self.cell_size,
+                        j * self.cell_size + self.cell_size,
+                        self.cell_size,
+                        self.cell_size,
                     ),
                     0,
                 )
@@ -127,5 +128,10 @@ class LifeGame:
 
 
 if __name__ == "__main__":
-    game = LifeGame()
+    screen_size = Width, Height = (600, 600)
+    cell_size = 10
+    ded_clr = 0, 0, 0
+    alv_clr = 255, 255, 255
+
+    game = LifeGame(screen_size, cell_size, ded_clr, alv_clr)
     game.run()
