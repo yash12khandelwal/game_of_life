@@ -10,6 +10,7 @@ Alv_clr = 255, 255, 255
 
 class LifeGame:
     def __init__(self):
+        print("input file: ")
         string = input()
         path = "input_files/" + string
         self.file = open(path, "r")
