@@ -19,20 +19,18 @@ class LifeGame:
         self.screen = pygame.display.set_mode(Screen_Size)
         self.clear()
         pygame.display.flip()
-        self.init_grids()
+
+        self.nc = int(Width / Cellsize)
+        self.nr = int(Height / Cellsize)
+
+        self.old_grid = self.init_grids()
         self.set_grid()
 
     def init_grids(self):
-        self.nc = int(Width / Cellsize)
-        self.nr = int(Height / Cellsize)
-        # self.new_grid = [[0 for x in range(self.nr)] * for y in range(self.nc)]
-        # self.old_grid = [[0 for x in range(self.nr)] * for y in range(self.nc)]
-        self.old_grid = []
-        for i in range(self.nc):
-            rows = []
-            for j in range(self.nr):
-                rows.append(0)
-            self.old_grid.append(rows)
+        rows = [0] * self.nr
+        old_grid = [rows] * self.nc
+
+        return old_grid
 
     def set_grid(self):
         n = len(self.data)
